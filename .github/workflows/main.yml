@@ -1,4 +1,4 @@
-name: ci_cd tes
+name: ci_cd test
 
 on:
   push:
@@ -35,4 +35,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: Docker again created!
+          message: FIX BUG!
