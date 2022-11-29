@@ -1,3 +1,3 @@
-FROM nginx:125thgfjhrty
+FROM nginx:latest
 MAINTAINER svyatoslavrv
-CMD ["nginx", "-d"]
+CMD ["nginx", "-g", "daemon off;"]
