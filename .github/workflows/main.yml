@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-# гит ветка при комите в которую происходит запуск ci/cd
+# гит ветка при комите в которую происходит запуск ci/cd, запускаем по комиту
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    #проверка пользователя для выгрузки образа в dockerhub
+    #проверка пользователя для выгрузки образа в dockerhub, пароль и логин небезопасно указывать, поэтому используем сикреты
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -42,4 +42,17 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: FIX BUG!
-      #оповещение о выполнении в ТГ
+      #оповещение о выполнении в ТГ 
+      - 
+        name: Deploy to Docker
+        uses: wshihadeh/docker-deployment-action@v1
+        with:
+           remote_docker_host: examplehost ip or name
+           #адрес компьютера для развертывания
+           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+           ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
+           #ключи авторизации на удаленном компьютере
+           deployment_mode: docker
+           # режим развертывания
+           args: nginx:latest
+           #имя контейнера на удаленном компьютере
