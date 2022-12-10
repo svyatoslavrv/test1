@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-#a git branch, where ci/cd pipeline launches after committing
+#a git branch, where ci/cd pipeline launches after committing 
 
 jobs:
   build:
